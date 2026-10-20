@@ -28,7 +28,7 @@
         }
         #ui-layer {
             position: absolute;
-            bottom: 8%;
+            bottom: 10%;
             z-index: 2;
             text-align: center;
             pointer-events: none;
@@ -88,18 +88,18 @@
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            // คำนวณ Scale แบบไดนามิกตามสัดส่วนจอ (ให้เว้นระยะปลอดภัย ไม่ติดขอบ)
-            let scale = Math.min(canvas.width / 42, canvas.height / 42); 
+            let scale = Math.min(canvas.width / 45, canvas.height / 55); 
 
-            // Offset แกน Y เพื่อชดเชยจุดศูนย์ถ่วงของสมการหัวใจ ให้สมมาตรกลางจอพอดี
-            let yOffset = 1.5 * scale; 
+            // 👈 กำหนดระยะขยับไปทางซ้าย (ปรับเปลี่ยนตัวเลขนี้ได้ตามต้องการ)
+            let xOffset = 25; 
 
             for (let i = 0; i < 60; i++) {
                 let angle = t + i * 0.2; 
                 let pos = heartFunction(angle);
 
-                let x = canvas.width / 2 + pos.x * scale;
-                let y = (canvas.height / 2) + (pos.y * scale) + yOffset;
+                // ลบ xOffset เพื่อเลื่อนตำแหน่งไปทางซ้าย
+                let x = (canvas.width / 2 - xOffset) + pos.x * scale;
+                let y = (canvas.height / 2) + pos.y * scale;
 
                 ctx.fillText("รักครูเกด", x, y);
             }
